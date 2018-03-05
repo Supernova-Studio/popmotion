@@ -1,45 +1,59 @@
 {
-  "private": true,
-  "name": "popmotion-packages",
+  "name": "popmotion",
+  "version": "8.1.14",
+  "description": "A functional, reactive motion library.",
   "author": "Matt Perry",
   "homepage": "https://popmotion.io",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Popmotion/popmotion"
+  },
+  "bugs": {
+    "url": "https://github.com/Popmotion/popmotion/issues"
+  },
+  "keywords": [
+    "animation",
+    "ux",
+    "ui",
+    "popmotion",
+    "canvas animation",
+    "dom animation",
+    "dom",
+    "pointer tracking",
+    "mouse",
+    "mouse tracking",
+    "touch",
+    "touch tracking",
+    "physics",
+    "interaction",
+    "interface",
+    "svg"
+  ],
+  "analyze": true,
+  "license": "MIT",
   "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "clean": "lerna clean",
-    "publish": "lerna publish",
-    "playground": "start-storybook -p 6006",
-    "build-playground": "build-storybook"
+    "build": "npm run test && tsc && tsc --outDir lib && NODE_ENV=production webpack && npm run measure",
+    "prepublish": "npm run build",
+    "postpublish": "npm run clean",
+    "watch": "NODE_ENV=development webpack --progress --colors --watch",
+    "measure": "gzip -c dist/popmotion.global.min.js | wc -c",
+    "test": "jest",
+    "publish-beta": "npm publish --tag beta",
+    "clean": "git clean -fd -e node_modules/ -e lib/ src/ -x ."
+  },
+  "dependencies": {
+    "framesync": "^3.1.7",
+    "style-value-types": "^1.0.4",
+    "stylefire": "Supernova-Studio/stylefire"
   },
   "devDependencies": {
-    "@storybook/react": "^3.2.13",
-    "babel-cli": "^6.16.0",
-    "babel-core": "^6.0.20",
-    "babel-eslint": "^5.0.4",
-    "babel-loader": "^6.0.1",
-    "babel-plugin-root-import": "^5.1.0",
-    "babel-plugin-transform-export-extensions": "^6.4.0",
-    "babel-plugin-transform-react-constant-elements": "^6.9.1",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.2.6",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2015-subset-loose": "^1.0.0",
-    "babel-preset-react": "^6.16.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-preset-stage-2": "^6.17.0",
-    "babel-register": "^6.3.13",
-    "eslint": "^3.19.0",
-    "eslint-plugin-flowtype": "^2.30.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jasmine": "2.2.0",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.0",
-    "estraverse-fb": "^1.3.1",
     "jest": "^21.1.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "string-replace-loader": "^1.3.0",
+    "ts-jest": "^21.2.4",
+    "ts-list": "^1.0.5",
+    "ts-loader": "^3.5.0",
+    "tslint-circular-dependencies": "^0.1.0",
+    "typescript": "^2.7.2",
     "webpack": "^3.0.0"
   },
   "jest": {
@@ -52,5 +66,6 @@
     },
     "testRegex": "/_tests/.*\\.(ts|js)$",
     "rootDir": "src"
-  }
+  },
+  "unpkg": "./dist/popmotion.global.js"
 }
