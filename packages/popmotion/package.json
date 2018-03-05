@@ -45,7 +45,7 @@
   "dependencies": {
     "framesync": "^3.1.7",
     "style-value-types": "^1.0.4",
-    "stylefire": "^1.2.4"
+    "stylefire": "Supernova-Studio/stylefire"
   },
   "devDependencies": {
     "jest": "^21.1.0",
